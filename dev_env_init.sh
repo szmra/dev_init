@@ -8,3 +8,5 @@ brew install virtualenvwrapper
 
 #at the end of the ~/.zshrc add "source virtualenvwrapper.sh"
 
+brew install direnv
+#cd into directory to activate virtualenv
