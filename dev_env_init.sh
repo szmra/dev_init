@@ -10,3 +10,6 @@ brew install virtualenvwrapper
 
 brew install direnv
 #cd into directory to activate virtualenv
+
+#setting up direnv and virtualenvwrapper on cd into project
+#https://github.com/direnv/direnv/wiki/Python#virtualenvwrapper
