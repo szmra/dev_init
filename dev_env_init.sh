@@ -1,2 +1,3 @@
-#assuming homebrew has been installed
-brew install --cask docker
+#assuming fresh install
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
