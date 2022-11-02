@@ -1,15 +1,12 @@
 #assuming fresh install
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+brew install gnupg yubikey-personalization hopenpgp-tools ykman pinentry-mac wget grep
+
+#have gpg create ~/.gnupg/
+gpg --list-keys
+cd ~/.gnupg ; wget https://raw.githubusercontent.com/drduh/config/master/gpg.conf
+chmod 600 gpg.conf
+
+#changing because venv is preffered
 brew install python
-#python3 installed at /opt/homebrew/bin/python3 (for big sur)
-
-brew install virtualenv
-brew install virtualenvwrapper
-
-#at the end of the ~/.zshrc add "source virtualenvwrapper.sh"
-
-brew install direnv
-#cd into directory to activate virtualenv
-
-#setting up direnv and virtualenvwrapper on cd into project
-#https://github.com/direnv/direnv/wiki/Python#virtualenvwrapper
