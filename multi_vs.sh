@@ -1,8 +1,9 @@
+#!/bin/zsh
 #This code initializes multipass, vscode, generates ssh-key
-brew install --cask multipass
-ssh-keygen -y -t ed25519 -f ~/.ssh/multipass-ed25519 > ~/.ssh/multipass-ed25519.pub
+VM_NAME=$1
+ssh-keygen -t ed25519 -f ~/.ssh/$VM_NAME-ed25519 -N ""
 
-multipass launch --name udev --cloud-init - <<EOF
+multipass launch --name $VM_NAME --cloud-init - <<EOF
 #cloud-config
 users:
   - default
@@ -12,9 +13,9 @@ users:
     groups: users, admin
     shell: /bin/bash
     ssh_import_id: None
-    lock_passwd: true
+    lock_passwd: false
     ssh_authorized_keys:
-      - $(cat ~/.ssh/multipass-ed25519.pub)
+      - $(cat ~/.ssh/${VM_NAME}-ed25519.pub)
 package_update: true
 package_upgrade: true
 packages:
@@ -23,11 +24,11 @@ EOF
 
 #adding ssh config to use specific ssh key
 mkdir -p ~/.ssh/config.d
-cat << EOF >> ~/.ssh/config.d/udev
-Host udev
-    HostName udev.local
+cat << EOF >> ~/.ssh/config.d/$VM_NAME
+Host $VM_NAME
+    HostName $VM_NAME.local
     IdentitiesOnly yes
-    IdentityFile ~/.ssh/multipass-ed25519
+    IdentityFile ~/.ssh/$VM_NAME-ed25519
 EOF
 
-echo "Include config.d/udev" >> ~/.ssh/config
+echo "Include config.d/$VM_NAME" >> ~/.ssh/config
